@@ -8,11 +8,11 @@ const { Post, User } = require("../Model");
 router.get("/", async(req, res) => {
     // initial get route this is for home page to display different post 
     const post = await Post.findAll();
-    const postpk = await Post.findByPk(1)
+   
 
     res.json({
-        post,
-        postpk
+        post
+        
     })
 })
 
@@ -25,12 +25,12 @@ router.post("/login", async(req, res) => {
         res.status(500).json(err);
     }
 });
-router.get("/login", async(req, res) => {
-    console.log("Home Routes GET/Login");
-    try {
-        res.json("we made it ")
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
+// router.get("/login", async(req, res) => {
+//     console.log("Home Routes GET/Login");
+//     try {
+//         res.json("we made it ")
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 module.exports = router;
