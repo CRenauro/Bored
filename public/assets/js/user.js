@@ -1,5 +1,6 @@
 const login = async(e) => {
     e.preventDefault();
+    try{
     const email = document.getElementById("email").value;
     const password = document.getElementById("pwd").value;
     if (email && password) {
@@ -8,8 +9,11 @@ const login = async(e) => {
             body: JSON.stringify({ email, password }),
             headers: { "Content-Type": "application/json" },
         });
+        return data.json()
     }
 };
+
+
 const register = async function(e) {
     e.preventDefault();
     console.log("register : POST")
