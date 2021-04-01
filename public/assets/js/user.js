@@ -1,16 +1,28 @@
 const login = async(e) => {
     e.preventDefault();
-    try{
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("pwd").value;
-    if (email && password) {
-        const data = await fetch(apiEndPoint, {
-            method: "POST",
-            body: JSON.stringify({ email, password }),
-            headers: { "Content-Type": "application/json" },
-        });
-        return data.json()
+    console.log("login route call start ");
+    try {
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("pwd").value;
+        console.log(email, password);
+        if (email && password) {
+            console.log("inside if block");
+            const data = await fetch("/api/login/login", {
+                method: "POST",
+                body: JSON.stringify({ email, password }),
+                headers: { "Content-Type": "application/json" },
+            });
+            if (data.ok) {
+                document.location.replace('/');
+            } else {
+                alert('Failed to log in');
+            }
+        }
+
+    } catch (err) {
+        console.log(err)
     }
+
 };
 
 

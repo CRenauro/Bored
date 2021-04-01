@@ -29,18 +29,22 @@ router.post("/login", async(req, res) => {
     console.log("POST /login");
 
     try {
-        const user = await User.findByOne({ where: { email: req.body.email } })
+        // console.log(User.checkPassword())
+        const user = await User.findOne({ where: { email: req.body.email } })
         if (!user) res.status(400).json({ message: "incorrect credentials " })
-        const password = await User.checkPassword(req.body.password)
+        console.log("we found user ")
+        const password = user.checkPassword(req.body.password)
+        console.log("password correct")
         if (!password) res.status(400).json({ message: "incorrect credentials " })
         req.session.save(() => {
-            res.session.loggedIn = true
-            req.session.username = user.name
-            req.session.email = user.email
+            req.session.logged_in = true,
+                req.session.username = user.name,
+                req.session.email = user.email
             res.status(200).json({ user, message: "we logged in " })
         })
 
     } catch (err) {
+        console.log(err)
         res.status(500).json(err);
     }
 });
