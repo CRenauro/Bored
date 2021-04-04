@@ -24,6 +24,8 @@ const login = async(e) => {
     }
 
 };
+
+
 const register = async function(e) {
     e.preventDefault();
     console.log("register : POST")
